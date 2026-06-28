@@ -1,0 +1,5 @@
+NYC_Data/
+nyc_taxi_cleaned/
+*.parquet
+.venv/
+__pycache__/
