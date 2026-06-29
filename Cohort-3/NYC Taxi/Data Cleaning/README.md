@@ -3,15 +3,15 @@
 **Project:** NYC Taxi Analysis
 **Cohort:** Cohort-3
 **Owner:** Saman
-**Stage:** Data Cleaning ✅
+**Stage:** Data Cleaning 
 
 ---
 
-## 📁 Dataset Download (Google Drive)
+## Dataset Download (Google Drive)
 
 The raw and cleaned datasets are hosted on Google Drive due to their large size (~3 GB).
 
-🔗 **[Click here to download the dataset](YOUR_GOOGLE_DRIVE_LINK_HERE)**
+ **[Click here to download the dataset](YOUR_GOOGLE_DRIVE_LINK_HERE)**
 
 ### What is inside the Drive folder
 
@@ -48,7 +48,7 @@ NYC_Taxi_Data/
 
 ---
 
-## 📋 Data Source
+## Data Source
 
 - **Source:** NYC Taxi & Limousine Commission (TLC)
 - **Website:** https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
@@ -84,7 +84,7 @@ NYC_Taxi_Data/
 
 ---
 
-## 🛠️ Tools Used
+## Tools Used
 
 - **Language:** Python 3
 - **Framework:** PySpark 3.5.1 (chosen over Pandas due to 42M row dataset size)
@@ -93,7 +93,7 @@ NYC_Taxi_Data/
 
 ---
 
-## 🧹 Data Cleaning Process
+## Data Cleaning Process
 
 The cleaning was done in two phases.
 
@@ -113,7 +113,7 @@ The same cleaning logic was applied to all 12 files loaded together as one combi
 
 ---
 
-## 🔍 Cleaning Steps in Detail
+## Cleaning Steps in Detail
 
 ### Step 1 — Raw Data Documentation
 Before making any changes, the raw data was documented:
@@ -192,7 +192,7 @@ These columns were computed once during cleaning to save time in EDA:
 
 ---
 
-## 📊 Cleaning Results Summary
+## Cleaning Results Summary
 
 | Metric | Value |
 |--------|-------|
@@ -205,7 +205,7 @@ These columns were computed once during cleaning to save time in EDA:
 
 ---
 
-## 📂 Scripts in this Folder
+## Scripts in this Folder
 
 | File | Purpose |
 |------|---------|
@@ -214,7 +214,7 @@ These columns were computed once during cleaning to save time in EDA:
 
 ---
 
-## ▶️ How to Run the Scripts
+## How to Run the Scripts
 
 ### Requirements
 ```
