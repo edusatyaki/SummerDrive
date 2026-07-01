@@ -152,9 +152,9 @@ pip install pandas numpy
 
 ## Checklist
 
-- [x] Raw data loaded and documented
-- [x] Missing values and duplicates checked
-- [x] Data types corrected and optimised
-- [x] Feature engineering completed
-- [x] Cleaned dataset exported for the team
-- [x] Cleaning steps explained in this README
+- Raw data loaded and documented
+- Missing values and duplicates checked
+- Data types corrected and optimised
+- Feature engineering completed
+- Cleaned dataset exported for the team
+- Cleaning steps explained in this README
