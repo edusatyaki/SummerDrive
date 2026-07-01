@@ -1,32 +1,30 @@
 # Marketing A/B Test — Data Cleaning
 
-**Project:** A/B Test Analysis
-**Cohort:** Cohort-3
-**Owner:** Farhana
-**Stage:** Data Cleaning
+**Project:** A/B Test Analysis  
+**Cohort:** Cohort-3  
+**Owner:** Farhana  
+**Stage:** Data Cleaning  
 
 ---
 
 ## Data Source
 
 - **Source:** Kaggle — Marketing A/B Testing Dataset
-- **Website:** https://www.kaggle.com/datasets/faviovaz/marketing-ab-testing
-- **Dataset:** Marketing A/B Test — 588,101 users
-- **Format:** CSV (1 file)
-- **Total raw rows:** 588,101
-- **Total raw columns:** 7
+- **Link:** https://www.kaggle.com/datasets/faviovaz/marketing-ab-testing
+- **Dataset size:** 588,101 rows, 7 columns
+- **Format:** CSV
 
-### Raw Data Columns (7 columns)
+### Raw Columns
 
 | Column | Description |
 |--------|-------------|
-| Unnamed: 0 | CSV row-index artifact — not real data |
-| user id | Unique identifier per user |
-| test group | Whether user saw 'ad' or 'psa' |
-| converted | Whether user converted (True/False) |
-| total ads | Number of ads shown to the user |
-| most ads day | Day of week user saw the most ads |
-| most ads hour | Hour of day user saw the most ads (0–23) |
+| Unnamed: 0 | Auto-generated row index from CSV export — not useful |
+| user id | Unique identifier for each user |
+| test group | Whether the user was shown an ad or a PSA |
+| converted | Whether the user converted (True/False) |
+| total ads | Total number of ads shown to the user |
+| most ads day | Day of the week when the user saw the most ads |
+| most ads hour | Hour of the day when the user saw the most ads (0–23) |
 
 ---
 
@@ -38,55 +36,68 @@
 
 ---
 
-## Cleaning Steps in Detail
+## Cleaning Steps
 
-### Step 1 — Raw Data Documentation
-Before making any changes, the raw data was documented:
-- Shape, dtypes, and info
-- Missing value count per column
-- Duplicate row count
+### Step 1 — Document the Raw Data
+
+Before touching anything, I recorded the state of the raw data:
+- Shape, column types, and basic info
+- Missing value counts per column
+- Number of duplicate rows
 - Numeric and categorical summary statistics
-- Group split validation (ad vs psa)
+- Group split between ad and psa users
 
-### Step 2 — Drop Redundant Column & Rename
-- Dropped `Unnamed: 0` — CSV index artifact, adds no value
-- Renamed all columns to snake_case for consistency
+This gives a baseline to compare against after cleaning.
 
-### Step 3 — Handle Missing Values & Duplicates
+### Step 2 — Drop Redundant Column and Rename
 
-| Column | Issue Found | Fix Applied |
-|--------|-------------|-------------|
-| Unnamed: 0 | Redundant index | Dropped |
-| user_id | None | Kept as-is |
-| test_group | None | Kept as-is |
-| converted | Boolean dtype | Converted to converted_int (0/1) |
-| total_ads | Heavily right-skewed (max 2065) | Bucketed safely with duplicates='drop' |
-| most_ads_day | None | Used to derive is_weekend |
-| most_ads_hour | None | Used to derive hour_period |
+- Dropped `Unnamed: 0` — it is just a row counter from the CSV export and carries no real information
+- Renamed all columns to snake_case (e.g. `user id` became `user_id`) for consistency and easier handling in code
+
+### Step 3 — Handle Missing Values and Duplicates
+
+| Column | Issue | Fix |
+|--------|-------|-----|
+| Unnamed: 0 | Redundant index column | Dropped entirely |
+| user_id | No issues | Kept as-is |
+| test_group | No issues | Kept as-is |
+| converted | Boolean (True/False) | Converted to integer (0/1) as `converted_int` |
+| total_ads | Heavily right-skewed, max value 2065 | Bucketed into categories using `pd.qcut` |
+| most_ads_day | No issues | Used to derive `is_weekend` |
+| most_ads_hour | No issues | Used to derive `hour_period` |
+
+No rows were dropped. The dataset had no missing values or duplicate rows to begin with.
 
 ### Step 4 — Feature Engineering
 
+Four new columns were added to make the data more useful for analysis:
+
 | New Column | Description |
 |------------|-------------|
-| converted_int | Boolean converted → integer (0/1) |
-| is_weekend | 1 if most_ads_day is Saturday or Sunday, else 0 |
-| hour_period | morning / afternoon / evening / night (ordered category) |
-| ads_bucket | total_ads bucketed into low / medium / high / very_high |
+| converted_int | The `converted` boolean mapped to 1 (True) or 0 (False) |
+| is_weekend | 1 if the user saw the most ads on Saturday or Sunday, else 0 |
+| hour_period | Hour grouped into morning, afternoon, evening, or night (ordered category) |
+| ads_bucket | Total ads bucketed into low, medium, high, or very_high quartiles |
 
-### Step 5 — Dtype Optimization & Memory Reduction
-- `test_group`, `most_ads_day`, `hour_period` → category
-- `converted_int`, `is_weekend`, `most_ads_hour` → int8
-- `total_ads` → downcasted integer
-- Memory usage measured before and after
+### Step 5 — Data Type Optimization
 
-### Step 6 — Final Verification
-- Confirmed 0 nulls, 0 duplicates in cleaned dataset
-- Final dtypes verified
-- Cleaned dataset exported as CSV
+Column types were tightened to reduce memory usage:
+- `test_group`, `most_ads_day`, `hour_period` converted to `category`
+- `converted_int`, `is_weekend`, `most_ads_hour` converted to `int8`
+- `total_ads` downcasted to the smallest fitting integer type
+
+Memory dropped from about 80 MB to around 10 MB — an 87% reduction.
+
+### Step 6 — Final Check
+
+- Confirmed 0 nulls across all columns
+- Confirmed 0 duplicate rows
+- Verified final dtypes
+- Exported cleaned dataset as `marketing_AB_cleaned.csv`
 
 ---
 
-## Cleaning Results Summary
+## Results Summary
 
 | Metric | Value |
 |--------|-------|
@@ -94,52 +105,56 @@ Before making any changes, the raw data was documented:
 | Cleaned rows | 588,101 |
 | Rows removed | 0 |
 | Original columns | 7 |
-| Final columns | 10 (7 original + 3 engineered, 1 dropped) |
+| Final columns | 10 |
+| Memory before | ~80 MB |
+| Memory after | ~10 MB |
 | Output format | CSV |
 
 ---
 
-## Group Split Validation
+## Group Split
 
 | Group | Count | Percentage |
 |-------|-------|------------|
-| ad | ~564,577 | ~96% |
-| psa | ~23,524 | ~4% |
+| ad | 564,577 | 96% |
+| psa | 23,524 | 4% |
 
 ---
 
-## Scripts in this Folder
+## Files in This Folder
 
-| File | Purpose |
-|------|---------|
-| `AB_test_data_cleaning.ipynb` | Full cleaning notebook |
-| `marketing_AB_cleaned.csv` | Cleaned dataset for team use |
+| File | Description |
+|------|-------------|
+| `AB_test_data_cleaning.ipynb` | Notebook with all cleaning and feature engineering steps |
+| `marketing_AB.csv` | Original raw dataset from Kaggle |
+| `marketing_AB_cleaned.csv` | Cleaned and engineered dataset ready for analysis |
 
 ---
 
 ## How to Run
 
-### Requirements
-- Python 3.10+
+**Requirements:**
+- Python 3.10 or above
 - pandas
 - numpy
 
-### Install
+**Install dependencies:**
 ```bash
 pip install pandas numpy
 ```
 
-### Run
+**Steps:**
 1. Upload `marketing_AB.csv` to your Colab session
 2. Open `AB_test_data_cleaning.ipynb`
-3. Runtime → Run All
+3. Go to Runtime and click Run All
 
 ---
 
-## ✅ Checklist
+## Checklist
 
-- [x] Raw data loaded and documented (source, rows, columns)
-- [x] Missing values and duplicates handled
-- [x] Data types corrected and validated
-- [x] Clean dataset exported for the team
+- [x] Raw data loaded and documented
+- [x] Missing values and duplicates checked
+- [x] Data types corrected and optimised
+- [x] Feature engineering completed
+- [x] Cleaned dataset exported for the team
 - [x] Cleaning steps explained in this README
