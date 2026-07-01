@@ -7,7 +7,7 @@ Part of **Cohort-2**.
 | Role | Owner |
 |------|-------|
 | Data Cleaning | Kanchan Rani |
-| Data Analysis | Soumen Dass |
+| Data Analysis | Sushant S |
 | Dashboard | Bhawana |
 | Report | Unassigned |
 

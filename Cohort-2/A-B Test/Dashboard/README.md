@@ -1,7 +1,7 @@
 # A-B Test - Dashboard
 
 **Cohort:** Cohort-2  
-**Owner:** Soumen Dass
+**Owner:** Sushant S
 
 ## Purpose
 Build the interactive dashboard and visualizations that present the findings clearly to a business audience.

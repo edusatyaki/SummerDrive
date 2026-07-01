@@ -1,7 +1,7 @@
 # Stock Market - Data Cleaning
 
 **Cohort:** Cohort-2  
-**Owner:** Soumen Dass
+**Owner:** Sushant S
 
 ## Purpose
 Load the raw dataset, handle missing values, fix data types, remove duplicates, and export a clean dataset the rest of the team can use.

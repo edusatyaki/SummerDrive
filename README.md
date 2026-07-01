@@ -7,7 +7,7 @@ Tracking repository for the Summer Drive student projects across three cohorts.
 | Cohort | Members | Projects |
 |--------|---------|----------|
 | [Cohort-1](./Cohort-1) | Drishti, Khyati, Prateek, Abhinav | E-Commerce, Diabetes, Stock Market, NYC Taxi |
-| [Cohort-2](./Cohort-2) | Soumen Dass, Bhawana, Kanchan Rani | A-B Test, NYC Taxi, Stock Market |
+| [Cohort-2](./Cohort-2) | Sushant S, Bhawana, Kanchan Rani | A-B Test, NYC Taxi, Stock Market |
 | [Cohort-3](./Cohort-3) | Saman, Farhana, Akshat | A-B Test, NYC Taxi, Stock Market |
 
 ## Structure

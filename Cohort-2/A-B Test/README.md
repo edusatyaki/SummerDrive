@@ -8,7 +8,7 @@ Part of **Cohort-2**.
 |------|-------|
 | Data Cleaning | Bhawana |
 | Data Analysis | Kanchan Rani |
-| Dashboard | Soumen Dass |
+| Dashboard | Sushant S |
 | Report | Unassigned |
 
 ## Folder guide

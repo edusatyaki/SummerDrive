@@ -1,7 +1,7 @@
 # NYC Taxi - Data Analysis
 
 **Cohort:** Cohort-2  
-**Owner:** Soumen Dass
+**Owner:** Sushant S
 
 ## Purpose
 Explore the clean data, run the statistics, find patterns, and document the key insights that answer the project questions.
