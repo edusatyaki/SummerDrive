@@ -1,8 +1,11 @@
-# 📈 Market Time Series Forecasting — Data Cleaning
+# Market Time Series Forecasting — Data Cleaning
 
-**Project:** Market Time Series Forecasting
+**Project:** Market Time Series Forecasting 
+
 **Dataset:** Yahoo Finance Historical Stock Data
+
 **Owner:** Akshat Agrawal
+
 **Stage:** Data Cleaning
 
 ---
@@ -259,11 +262,11 @@ Export Clean Dataset
 
 # Deliverables
 
-* ✅ Historical stock market data downloaded from Yahoo Finance
-* ✅ Raw dataset exported for reproducibility
-* ✅ Dataset inspected and documented
-* ✅ Missing values and duplicate records verified
-* ✅ Data types validated
-* ✅ Memory usage optimized
-* ✅ Final cleaned dataset exported
-* ✅ Complete Google Colab notebook included
+* Historical stock market data downloaded from Yahoo Finance
+* Raw dataset exported for reproducibility
+* Dataset inspected and documented
+* Missing values and duplicate records verified
+* Data types validated
+* Memory usage optimized
+* Final cleaned dataset exported
+* Complete Google Colab notebook included
