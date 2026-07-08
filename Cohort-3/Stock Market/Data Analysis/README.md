@@ -1,4 +1,4 @@
-# Stock Market EDA and Forecasting — Project README
+# Stock Market EDA and Forecasting 
 
 ## Overview
 
