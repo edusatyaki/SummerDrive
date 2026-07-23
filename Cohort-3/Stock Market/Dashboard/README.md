@@ -9,7 +9,7 @@
 
 ## Overview
 
-This phase builds on Akshat's financial EDA (Phase 0–2) and Saman's forecasting models (Phase 3) to deliver an interactive Tableau dashboard, a BI data export pipeline, and an executive summary on forecast reliability.
+This phase builds on Akshat's financial EDA (Phase 0–2) to deliver an interactive Tableau dashboard and a BI data export pipeline. Forecast reliability reporting (Phase 3, Saman) is referenced but not finalized in this submission — see note under Task 3.
 
 ---
 
@@ -66,7 +66,7 @@ For each ticker (AAPL, MSFT, SPY), the following indicators were computed:
 
 ### Task 2 — Build Interactive Financial Dashboard (Tableau)
 
-An 11-sheet Tableau workbook covering price analysis, volume, technical indicators, returns, correlation, and seasonality, organized into 3 summary dashboard views.
+A Tableau workbook covering price analysis, volume, technical indicators, returns, correlation, and seasonality — organized into 2 dashboard views, each with live interactive filters (Ticker selector and Date range slider) rather than static text commentary, so the dashboard functions as an exploration tool rather than a fixed report.
 
 #### Individual Sheets
 
@@ -76,43 +76,26 @@ An 11-sheet Tableau workbook covering price analysis, volume, technical indicato
 | Volume | Small multiples bar chart | Trading volume over time for each ticker separately |
 | Bollinger Bands | Line chart | BB Upper, BB Mid, BB Lower and Close for selected ticker |
 | Volatility | Area chart | 20-day rolling volatility — highlights volatility clustering |
-| Returns Comparison | Bar chart | Daily returns for AAPL, MSFT, SPY side by side |
-| Correlation | Scatter plot | AAPL vs SPY daily returns — beta = 1.195, p < 0.0001 |
-| Correlation MSFT | Scatter plot | MSFT vs SPY daily returns — beta = 1.115, p < 0.0001 |
-| Seasonality | Grouped bar chart | Monthly returns for all three tickers across full 5-year window |
+| Returns Comparison | Line chart | Daily returns for AAPL, MSFT, SPY overlaid |
+| Correlation | Scatter plot | AAPL and MSFT daily returns vs SPY, plotted together with separate trend lines (beta ≈ 1.195 for AAPL, ≈ 1.115 for MSFT; both p < 0.0001) |
+| Seasonality | Grouped bar chart | Monthly returns for all three tickers across the full 5-year window |
+| KPI cards | Single-value text tiles | Latest Close, Latest Daily Return, 52-Week High/Low, Total Volume — update live with the Ticker and Date filters |
 
 #### Dashboard Views
 
-**Trading Desk View — "How is the stock behaving right now?"**
-Combines Price & Moving Averages, Bollinger Bands, Volume, and 20-Day Volatility. Includes written insights covering trend direction, golden/death cross signals, volatility clustering, and volume spikes.
+**Price & Technicals** — *"How is the stock behaving right now?"*
+KPI row (Latest Close, Latest Return, 52W High/Low, Total Volume), Ticker dropdown, and Date range slider, combined with Price & Moving Averages, Volume, Bollinger Bands, and 20-Day Volatility charts.
 
-**Portfolio Risk View — "How do these stocks move together?"**
-Combines Daily Returns comparison with AAPL vs SPY and MSFT vs SPY scatter plots. Includes written insights on beta interpretation, diversification implications, and statistical significance of correlations.
+**Returns & Seasonality** — *"How do these stocks move together, and are there seasonal patterns?"*
+Daily Returns comparison, combined AAPL/MSFT vs SPY correlation scatter, and the monthly Seasonality breakdown across all three tickers.
 
-**Strategy Planning View — "Are there seasonal patterns worth planning around?"**
-Monthly returns bar chart across the full 5-year window with written insights covering AAPL's strongest month (July, +0.307% avg daily return), weakest month (September, −0.162%), and a caution that these are descriptive patterns over a limited window, not reliable trading signals.
+Both views are designed for interactive exploration — filtering by ticker or date range updates every chart live — rather than relying on static written commentary.
 
 ---
 
 ### Task 3 — Executive Summary on Forecast Reliability
 
-#### Model Performance (from Saman's Phase 3 forecasting)
-
-| Model | RMSE | MAPE | Verdict |
-|-------|------|------|---------|
-| SARIMA (0,1,2) | ~9.7 | ~2.6% | Best performer on 30-day holdout |
-| Facebook Prophet | ~23.1 | ~6.9% | Underperformed due to sharp price movement in test window |
-
-#### Key Findings
-
-- The AAPL price series is non-stationary in level but stationary after first differencing of log returns, confirming ARIMA family models are appropriate
-- SARIMA outperformed Prophet significantly — RMSE was roughly 2.4x lower on the 30-day test window
-- Prophet's underperformance is explained by a sharp short-term price movement in the evaluation window — Prophet's trend component smooths over sudden moves rather than tracking them
-- Both models produce widening confidence intervals beyond 2 weeks, meaning short-term forecasts are more reliable than longer-horizon ones
-- Neither model should be used for trading decisions in isolation
-
-#### Recommendation
-SARIMA(0,1,2) is the preferred model for short-term AAPL price forecasting on this dataset. For production use, the model should be retrained monthly on a rolling window and evaluated against a fresh holdout set each time.
+> **Status: pending.** This section depends on Saman's Phase 3 forecasting output (ARIMA/Prophet model results with a finalized export). As of this submission, a finalized forecast export was not available to incorporate into the dashboard or this summary. This section should be completed once Saman's model output is delivered, rather than filled in from preliminary/unofficial notebook results.
 
 ---
 
@@ -130,6 +113,7 @@ All files committed to `Cohort-3 → Stock Market → Dashboard`.
 | `stock_historical_for_BI.csv` | BI-ready historical price + indicator data |
 | `stock_returns_for_BI.csv` | BI-ready daily returns comparison data |
 | `stock_monthly_summary_for_BI.csv` | BI-ready monthly return summary |
+| `dashboard photoes/` | Preview images of the 2 dashboard views |
 
 ---
 
@@ -138,12 +122,10 @@ All files committed to `Cohort-3 → Stock Market → Dashboard`.
 ### Requirements
 - pandas
 - numpy
-- statsmodels
-- prophet
 
 ### Install
 ```bash
-pip install pandas numpy statsmodels prophet
+pip install pandas numpy
 ```
 
 1. Download `cleaned_stock_data.csv` from `Cohort-3 → Stock Market → Data Cleaning`
