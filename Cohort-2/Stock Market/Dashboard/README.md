@@ -154,8 +154,6 @@ README.md
 Dashboard Screenshots/
 ```
 
-*(Update the file names according to your project.)*
-
 ---
 
 # Usage
