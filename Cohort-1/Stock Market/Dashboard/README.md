@@ -4,7 +4,11 @@
 **Owner:** Abhinav Choudhary
 
 ---
+# Dashboard Link
 
+https://public.tableau.com/views/StockMarketDashboard_17866162669960/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
+
+---
 # Purpose
 
 Design and develop an interactive Tableau dashboard that presents stock market insights in a clear and business-friendly manner. The dashboard enables users to analyze historical stock performance, forecast accuracy, trading behavior, and investment growth through interactive visualizations and KPIs.
